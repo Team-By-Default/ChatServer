@@ -5,49 +5,37 @@ import java.net.*;
  
 public class Server {
     private static int PUERTO = 2017;
- 
+  
     public static void main(String args[]) {
-         
-        BufferedReader entrada;
-        DataOutputStream salida;
-        Socket socket;
-        ServerSocket serverSocket;
-         
+    	 BufferedReader entrada;
+    	 Socket socket;
+    	 ServerSocket serverSocket;
+    	 Sala salaDeChat = new Sala("salaPrincipal");
+    	    
         try {
             serverSocket = new ServerSocket(PUERTO);
+            
+            while(true){
  
             System.out.println("Esperando una conexi�n...");
  
-            socket = serverSocket.accept(); //En bucle y derivar a threads
+            socket = serverSocket.accept(); 
  
             System.out.println("Un cliente se ha conectado...");
+            
+            entrada = new BufferedReader(new InputStreamReader( 
+                    socket.getInputStream())); 
+            
+            String nick = entrada.readLine(); 
+            
+            EscuchaCliente hiloCliente = new EscuchaCliente( socket );
+            
+            salaDeChat.agregarCliente(nick, socket);
  
-            // Para los canales de entrada y salida de datos
- 
-            entrada = new BufferedReader(new InputStreamReader(
-                    socket.getInputStream()));
- 
-            salida = new DataOutputStream(socket.getOutputStream());
- 
-            System.out.println("Confirmando conexion al cliente....");
- 
-            salida.writeUTF("Conexi�n exitosa...");
- 
-            // Para recibir el mensaje
- 
-            String mensajeRecibido = entrada.readLine();
- 
-            System.out.println(mensajeRecibido);
- 
-            salida.writeUTF("Se recibio tu mensaje."); //Hace falta?
- 
-            salida.writeUTF("Gracias por conectarte."); //Hace falta?
- 
-            System.out.println("Cerrando conexi�n..."); //Cuando ponga Desconectar
- 
-            // Cerrando la conex�n
-            serverSocket.close();
- 
+            hiloCliente.start();
+            
+            }
+            
         } catch (IOException e) {
             System.out.println("Error de entrada/salida."  + e.getMessage());
         }
