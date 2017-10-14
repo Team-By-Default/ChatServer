@@ -18,7 +18,7 @@ public class Server {
  
             System.out.println("Esperando una conexión...");
  
-            socket = serverSocket.accept();
+            socket = serverSocket.accept(); //En bucle y derivar a threads
  
             System.out.println("Un cliente se ha conectado...");
  
@@ -39,11 +39,11 @@ public class Server {
  
             System.out.println(mensajeRecibido);
  
-            salida.writeUTF("Se recibio tu mensaje.");
+            salida.writeUTF("Se recibio tu mensaje."); //Hace falta?
  
-            salida.writeUTF("Gracias por conectarte.");
+            salida.writeUTF("Gracias por conectarte."); //Hace falta?
  
-            System.out.println("Cerrando conexión...");
+            System.out.println("Cerrando conexión..."); //Cuando ponga Desconectar
  
             // Cerrando la conexón
             serverSocket.close();
