@@ -7,13 +7,11 @@ import java.net.Socket;
 
 public class EscuchaCliente extends Thread{
 
-	ServerSocket serversocket;
 	BufferedReader entrada;
     DataOutputStream salida;
     Socket clientesocket;
     
-    public EscuchaCliente(ServerSocket ss,Socket cs) {
-    	this.serversocket=ss;
+    public EscuchaCliente(Socket cs) {
     	this.clientesocket=cs;
     }
     
