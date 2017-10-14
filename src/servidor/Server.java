@@ -16,7 +16,7 @@ public class Server {
         try {
             serverSocket = new ServerSocket(PUERTO);
  
-            System.out.println("Esperando una conexión...");
+            System.out.println("Esperando una conexiï¿½n...");
  
             socket = serverSocket.accept(); //En bucle y derivar a threads
  
@@ -31,7 +31,7 @@ public class Server {
  
             System.out.println("Confirmando conexion al cliente....");
  
-            salida.writeUTF("Conexión exitosa...");
+            salida.writeUTF("Conexiï¿½n exitosa...");
  
             // Para recibir el mensaje
  
@@ -43,9 +43,9 @@ public class Server {
  
             salida.writeUTF("Gracias por conectarte."); //Hace falta?
  
-            System.out.println("Cerrando conexión..."); //Cuando ponga Desconectar
+            System.out.println("Cerrando conexiï¿½n..."); //Cuando ponga Desconectar
  
-            // Cerrando la conexón
+            // Cerrando la conexï¿½n
             serverSocket.close();
  
         } catch (IOException e) {
